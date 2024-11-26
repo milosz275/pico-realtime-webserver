@@ -25,9 +25,11 @@ This is an example repository for a real-time web server running on Raspberry Pi
 
 Before cloning the repository, check if you already have those repositories with corresponding exports set up:
 
-- [pico-sdk](https://github.com/raspberrypi/pico-sdk) with `PICO_SDK_PATH` exported
-- [pico-extras](https://github.com/raspberrypi/pico-extras) with `PICO_EXTRAS_PATH` exported
-- [freertos-kernel](https://github.com/freertos/freertos-kernel) with `FREERTOS_KERNEL_PATH` exported
+| Dependency | Export Path |
+|------------|--------------|
+| [pico-sdk](https://github.com/raspberrypi/pico-sdk) | `PICO_SDK_PATH` |
+| [pico-extras](https://github.com/raspberrypi/pico-extras) | `PICO_EXTRAS_PATH` |
+| [freertos-kernel](https://github.com/freertos/freertos-kernel) | `FREERTOS_KERNEL_PATH` |
 
 If you don't have them set up, you can simply clone the repository with submodules:
 
