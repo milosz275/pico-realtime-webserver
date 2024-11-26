@@ -1,16 +1,16 @@
-# Pico W Template
+# Pico Real-time Webserver
 
-[![CMake Build Workflow](https://github.com/milosz275/pico-w-template/actions/workflows/cmake.yml/badge.svg)](https://github.com/milosz275/pico-w-template/actions/workflows/cmake.yml)
-[![CodeQL with CMake Build](https://github.com/milosz275/pico-w-template/actions/workflows/codeql.yml/badge.svg)](https://github.com/milosz275/pico-w-template/actions/workflows/codeql.yml)
-[![Doxygen Pages](https://github.com/milosz275/pico-w-template/actions/workflows/doxygen-pages.yml/badge.svg)](https://github.com/milosz275/pico-w-template/actions/workflows/doxygen-pages.yml)
-[![License](https://img.shields.io/github/license/milosz275/pico-w-template)](/LICENSE)
+[![CMake Build Workflow](https://github.com/milosz275/pico-realtime-webserver/actions/workflows/cmake.yml/badge.svg)](https://github.com/milosz275/pico-realtime-webserver/actions/workflows/cmake.yml)
+[![CodeQL with CMake Build](https://github.com/milosz275/pico-realtime-webserver/actions/workflows/codeql.yml/badge.svg)](https://github.com/milosz275/pico-realtime-webserver/actions/workflows/codeql.yml)
+[![Doxygen Pages](https://github.com/milosz275/pico-realtime-webserver/actions/workflows/doxygen-pages.yml/badge.svg)](https://github.com/milosz275/pico-realtime-webserver/actions/workflows/doxygen-pages.yml)
+[![License](https://img.shields.io/github/license/milosz275/pico-realtime-webserver)](/LICENSE)
 
 ![logo](assets/logo.png)
 
-This is a template for a Pico W project. It includes a basic project structure and a simple example of a Pico W application in C using pico-sdk and pico-extras. Feel free to use it if CMake is is challenging for you or you just want to get started quickly.
+This is an example repository for a real-time web server running on Raspberry Pi Pico W using [FreeRTOS Kernel](https://github.com/freertos/freertos-kernel). The server is capable of serving static files and handling multiple connections at the same time.
 
-- [GitHub repository](https://github.com/milosz275/pico-w-template)
-- [Doxygen documentation](https://milosz275.github.io/pico-w-template/)
+- [GitHub repository](https://github.com/milosz275/pico-realtime-webserver)
+- [Doxygen documentation](https://milosz275.github.io/pico-realtime-webserver/)
 
 ## Table of Contents
 
@@ -18,49 +18,41 @@ This is a template for a Pico W project. It includes a basic project structure a
   - [Prerequisites](#prerequisites)
   - [Configuration](#configuration)
   - [Building](#building)
-- [Acknowledgements](#acknowledgements)
 - [License](#license)
+- [Acknowledgments](#acknowledgments)
 
 ## Getting Started
 
-To use this template click "Use this template" and create a new repository or open the template in a codespaces [or use this template here](https://github.com/new?template_name=pico-w-template&template_owner=milosz275).
+Before cloning the repository, check if you already have those repositories with corresponding exports set up:
 
-![use template screen](assets/use-template.png)
+- [pico-sdk](https://github.com/raspberrypi/pico-sdk) with `PICO_SDK_PATH` exported
+- [pico-extras](https://github.com/raspberrypi/pico-extras) with `PICO_EXTRAS_PATH` exported
+- [freertos-kernel](https://github.com/freertos/freertos-kernel) with `FREERTOS_KERNEL_PATH` exported
 
-After the repository is recreated, please modify repo settings in order to GitHub Pages docs deploy workflow succeed. Select GitHub Actions as a source for build and deployment.
+If you don't have them set up, you can simply clone the repository with submodules:
 
-> [!IMPORTANT]
-> Even if your repository is private, deployed docs will be available publicly.
+```bash
+git clone --recurse-submodules https://github.com/milosz275/pico-realtime-webserver.git
+cd pico-realtime-webserver
+```
 
-![github pages](assets/pages-settings.png)
+This will clone the repository with all the required submodules in `lib` directory.
 
-CodeQL might not work for private repositories. If you want to use it, you need to enable it in the repository settings, else remove the workflow.
+If you already have the repositories and exports set up, you can clone the repository without submodules:
+
+```bash
+git clone https://github.com/milosz275/pico-realtime-webserver.git
+cd pico-realtime-webserver
+```
+
+CMake will automatically find the required libraries if the exports are set up correctly.
 
 ### Prerequisites
 
-It might be necessary to install additional dependencies to build the project. The following commands install the required dependencies on Ubuntu:
+The following commands install the required dependencies on Ubuntu and Debian based systems:
 
 ```bash
 sudo apt-get install cmake gcc-arm-none-eabi libnewlib-arm-none-eabi build-essential ninja-build
-```
-
-This project uses git submodules to include the Pico SDK and Pico Extras. To clone the repository with submodules use the following command:
-
-```bash
-git clone --recurse-submodules https://github.com/{your_username}/{your_repo}.git
-```
-
-If you have already cloned the repository without submodules you can initialize them using the following commands:
-
-```bash
-git submodule update --init
-```
-
-If any issues occur during the build, you may wanted to update the submodules inside `pico-sdk`:
-
-```bash
-cd lib/pico-sdk
-git submodule update --init
 ```
 
 ### Configuration
@@ -79,7 +71,7 @@ Please create a `wifi_credentials.h` file inside `include` directory. The file s
 
 ### Building
 
-To build the project, run the following commands:
+To build the project use `chmod +x ./build.sh && ./build.sh` or run the following commands:
 
 ```bash
 mkdir build
@@ -90,14 +82,12 @@ ninja
 
 This will produce `.uf2` file located in `build/src` directory. You can flash it to your Pico W device using the USB mass storage mode. [Instruction](https://youtu.be/d-karKb53og?si=i1do_1Gk_GdIMxir)
 
-## Acknowledgements
-
-- [Pico SDK](https://github.com/raspberrypi/pico-sdk)
-- [Pico Extras](https://github.com/raspberrypi/pico-extras)
-- [Pico Examples](https://github.com/raspberrypi/pico-examples)
-- [Pico Template](https://github.com/modmuss50/pico-template)
-- [Pico W Webserver Example](https://github.com/krzmaz/pico-w-webserver-example)
-
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](https://github.com/milosz275/pico-w-template/blob/main/LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE](https://github.com/milosz275/pico-realtime-webserver/blob/main/LICENSE) file for details.
+
+## Acknowledgments
+
+- [Pico W Template](https://github.com/milosz275/pico-w-template)
+- [Pico W FreeRTOS](https://github.com/milosz275/pico-w-freertos)
+- [Pico Webserver Example](https://github.com/krzmaz/pico-w-webserver-example)

@@ -1,5 +1,5 @@
-#ifndef _LWIPOPTS_H
-#define _LWIPOPTS_H
+#ifndef __LWIPOPTS_H
+#define __LWIPOPTS_H
 
 #ifndef NO_SYS
 #define NO_SYS                      1
@@ -88,6 +88,7 @@
 #define LWIP_HTTPD_SSI              10
 #define LWIP_HTTPD_CGI              10
 #define LWIP_HTTPD_SSI_INCLUDE_TAG  0
-#define HTTPD_FSDATA_FILE           "fsdata.c"
+#define LWIP_HTTPD_MAX_TAG_NAME_LEN 16
+#define HTTPD_FSDATA_FILE           "generated_fsdata.c"
 
-#endif
+#endif // __LWIPOPTS_H

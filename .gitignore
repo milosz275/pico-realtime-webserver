@@ -68,3 +68,4 @@ Doxyfile.bak
 
 # Generated files
 external/
+generated_fsdata.c
