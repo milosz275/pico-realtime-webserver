@@ -41,12 +41,12 @@ jobs:
         git submodule update --init
         echo "PICO_EXTRAS_PATH=$(pwd)" >> $GITHUB_ENV
 
-    # - name: Setup FreeRTOS Kernel
-    #   run: |
-    #     echo "Setting up FreeRTOS Kernel"
-    #     cd lib/FreeRTOS-Kernel
-    #     git submodule update --init
-    #     echo "FREERTOS_KERNEL_PATH=$(pwd)" >> $GITHUB_ENV
+    - name: Setup FreeRTOS Kernel
+      run: |
+        echo "Setting up FreeRTOS Kernel"
+        cd lib/FreeRTOS-Kernel
+        git submodule update --init
+        echo "FREERTOS_KERNEL_PATH=$(pwd)" >> $GITHUB_ENV
 
     - name: Create wifi_credentials.h
       run: |

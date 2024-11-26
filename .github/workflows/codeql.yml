@@ -78,13 +78,13 @@ jobs:
           git submodule update --init
           echo "PICO_EXTRAS_PATH=$(pwd)" >> $GITHUB_ENV
 
-      # - if: matrix.build-mode == 'manual'
-      #   name: Setup FreeRTOS Kernel
-      #   run: |
-      #     echo "Setting up FreeRTOS Kernel"
-      #     cd lib/FreeRTOS-Kernel
-      #     git submodule update --init
-      #     echo "FREERTOS_KERNEL_PATH=$(pwd)" >> $GITHUB_ENV
+      - if: matrix.build-mode == 'manual'
+        name: Setup FreeRTOS Kernel
+        run: |
+          echo "Setting up FreeRTOS Kernel"
+          cd lib/FreeRTOS-Kernel
+          git submodule update --init
+          echo "FREERTOS_KERNEL_PATH=$(pwd)" >> $GITHUB_ENV
 
       - if: matrix.build-mode == 'manual'
         name: Setup Pico Board
