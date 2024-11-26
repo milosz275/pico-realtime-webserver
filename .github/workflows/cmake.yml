@@ -44,7 +44,7 @@ jobs:
     - name: Setup FreeRTOS Kernel
       run: |
         echo "Setting up FreeRTOS Kernel"
-        cd lib/FreeRTOS-Kernel
+        cd lib/freertos-kernel
         git submodule update --init
         echo "FREERTOS_KERNEL_PATH=$(pwd)" >> $GITHUB_ENV
 
