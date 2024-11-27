@@ -1,12 +1,16 @@
 #include "ssi.h"
 
 #include <stdint.h>
+#include <string.h>
+
 #include "hardware/adc.h"
 #include "pico/cyw43_arch.h"
 #include "lwip/apps/httpd.h"
 #include "pico/cyw43_arch.h"
 #include "lwipopts.h"
 #include "cgi.h"
+#include "auth.h"
+#include "common.h"
 
 const char* __not_in_flash("httpd") ssi_example_tags[] =
 {
@@ -20,19 +24,28 @@ uint16_t __time_critical_func(ssi_handler)(int iIndex, char *pcInsert, int iInse
 {
     size_t printed;
     bool onboard_led_state = cyw43_arch_gpio_get(CYW43_WL_GPIO_LED_PIN);
-    switch (iIndex)
+
+    // Get the query string (this example assumes it's available via a global pointer or passed by the server)
+    const char *query_string = "session=your_hash_here"; // Replace this with actual query string logic
+
+    const char *session_hash = get_query_param(query_string, "session");
+    if (!session_hash || !is_session_valid(session_hash))
     {
+        return snprintf(pcInsert, iInsertLen, "Access Denied"); // Restrict unauthorized access
+    }
+
+    switch (iIndex) {
         case 0: /* "hello" */
             printed = snprintf(pcInsert, iInsertLen, "Hello World!");
             break;
         case 1: /* state1 */
-            if(onboard_led_state)
+            if (onboard_led_state)
                 printed = snprintf(pcInsert, iInsertLen, "checked");
             else
                 printed = snprintf(pcInsert, iInsertLen, " ");
             break;
         case 2: /* bg1 */
-            if(onboard_led_state)
+            if (onboard_led_state)
                 printed = snprintf(pcInsert, iInsertLen, "\"background-color:green;\"");
             else
                 printed = snprintf(pcInsert, iInsertLen, "\"background-color:red;\"");
@@ -44,6 +57,7 @@ uint16_t __time_critical_func(ssi_handler)(int iIndex, char *pcInsert, int iInse
             printed = 0;
             break;
     }
+
     LWIP_ASSERT("sane length", printed <= 0xFFFF);
     return (uint16_t)printed;
 }

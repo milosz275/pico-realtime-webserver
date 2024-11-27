@@ -48,11 +48,18 @@
             function submitForm(event) {
                 event.preventDefault();
                 const password = document.getElementById('password').value;
-                fetch(`/auth.cgi?password=${encodeURIComponent(password)}`)
-                    .then(response => response.text())
-                    .then(data => {
-                        document.body.innerHTML = data;
-                        console.log(data);
+                fetch(`/auth.cgi?password=${encodeURIComponent(password)}`, {
+                    method: 'GET',
+                    credentials: 'same-origin' // This ensures cookies are sent along with the request
+                })
+                    .then(response => {
+                        if (response.redirected) {
+                            // If the server redirects to the admin page, reload the page
+                            window.location.href = response.url; // Redirect to admin page
+                        } else {
+                            // Otherwise, display the error message or redirect back to login
+                            document.body.innerHTML = 'Authentication failed. Please try again.';
+                        }
                     })
                     .catch(error => {
                         console.error('Error:', error);
