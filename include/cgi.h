@@ -7,6 +7,11 @@ const char* cgi_handler_hello_world(int iIndex, int iNumParams, char *pcParam[],
 
 const char* cgi_handler_onboard_led(int iIndex, int iNumParams, char *pcParam[], char *pcValue[]);
 
+/**
+ * CGI Handler for Authentication
+ */
 const char* cgi_handler_auth(int iIndex, int iNumParams, char *pcParam[], char *pcValue[]);
+
+const char* cgi_favicon(int iIndex, int iNumParams, char *pcParam[], char *pcValue[]);
 
 #endif // __CGI_H

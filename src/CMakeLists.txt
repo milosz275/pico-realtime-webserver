@@ -22,6 +22,7 @@ add_executable(${PROGRAM_NAME}
     cgi.c
     common.c
     state.c
+    auth.c
 )
 
 target_link_libraries(${PROGRAM_NAME}

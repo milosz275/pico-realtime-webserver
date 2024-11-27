@@ -27,7 +27,9 @@
         "cyw43_arch.h": "c",
         "lwipopts.h": "c",
         "common.h": "c",
-        "state.h": "c"
+        "state.h": "c",
+        "cgi.h": "c",
+        "httpd.h": "c"
     },
     "C_Cpp.default.compilerPath": "/usr/bin/arm-none-eabi-gcc",
     "C_Cpp.errorSquiggles": "enabledIfIncludesResolve"

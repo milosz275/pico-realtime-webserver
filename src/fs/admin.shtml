@@ -47,7 +47,10 @@
         <script>
             function toggleLED(event) {
                 event.preventDefault();
-                fetch('/onboard_led.cgi')
+                fetch('/onboard_led.cgi', {
+                    method: 'GET',
+                    credentials: 'same-origin' // Send the session cookie with the request
+                })
                     .then(response => response.text())
                     .then(data => {
                         document.body.innerHTML = data;
@@ -64,10 +67,11 @@
             <h1>Pico W Admin</h1>
             <p><!--#hello--></p>
             <form onsubmit="toggleLED(event)">
-                <input type="checkbox" id="ledCheckbox">
+                <input type="checkbox" id="ledCheckbox" <!--#state1-->>
                 <span style=<!--#bg1-->>Onboard LED</span><br>
+                <input type="hidden" id="sessionHash" value=<!--#session-->>
             </form>
-            <span>Onboard Temp: <!--#temp1--></span><br>
+            <p>Onboard Temp: <!--#temp1--></p><br>
         </div>
     </body>
 </html>
