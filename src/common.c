@@ -2,6 +2,7 @@
 
 #include <stdio.h>
 #include <pico/stdlib.h>
+#include <hardware/adc.h>
 #include "lwip/apps/httpd.h"
 
 #include "FreeRTOS.h"
@@ -10,9 +11,12 @@
 
 SemaphoreHandle_t print_mutex = NULL;
 
-void init_smp()
+void init_common()
 {
     print_mutex = xSemaphoreCreateMutex();
+    adc_init();
+    adc_set_temp_sensor_enabled(true);
+    adc_select_input(4);
 }
 
 void vGuarded_print(const char* format, ...)

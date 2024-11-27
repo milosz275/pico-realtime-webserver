@@ -7,7 +7,7 @@
 
 ![logo](assets/logo.png)
 
-This is an example repository for a real-time web server running on Raspberry Pi Pico W using [FreeRTOS Kernel](https://github.com/freertos/freertos-kernel). The server is capable of serving static files and handling multiple connections at the same time.
+This is an example repository for a real-time web server running on Raspberry Pi Pico W using [FreeRTOS Kernel](https://github.com/freertos/freertos-kernel). The server is capable of serving static files and handling multiple connections adding simple authentication mechanism.
 
 - [GitHub repository](https://github.com/milosz275/pico-realtime-webserver)
 - [Doxygen documentation](https://milosz275.github.io/pico-realtime-webserver/)

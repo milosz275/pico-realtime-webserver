@@ -25,7 +25,9 @@
         "portable.h": "c",
         "portmacro.h": "c",
         "cyw43_arch.h": "c",
-        "lwipopts.h": "c"
+        "lwipopts.h": "c",
+        "common.h": "c",
+        "state.h": "c"
     },
     "C_Cpp.default.compilerPath": "/usr/bin/arm-none-eabi-gcc",
     "C_Cpp.errorSquiggles": "enabledIfIncludesResolve"

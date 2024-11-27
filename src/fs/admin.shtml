@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Pico W</title>
+        <title>Pico W Admin</title>
         <link rel="icon" type="image/icon" href="/favicon.ico">
         <style>
             body {
@@ -26,7 +26,7 @@
                 margin-bottom: 20px;
             }
             input[type="password"] {
-                width: 80%;
+                width: 100%;
                 padding: 10px;
                 margin: 10px 0;
                 border: 1px solid #ccc;
@@ -45,10 +45,9 @@
             }
         </style>
         <script>
-            function submitForm(event) {
+            function toggleLED(event) {
                 event.preventDefault();
-                const password = document.getElementById('password').value;
-                fetch(`/auth.cgi?password=${encodeURIComponent(password)}`)
+                fetch('/onboard_led.cgi')
                     .then(response => response.text())
                     .then(data => {
                         document.body.innerHTML = data;
@@ -62,12 +61,13 @@
     </head>
     <body>
         <div class="container">
-            <h1>Pico W</h1>
-            <p>Enter the password to access the file system.</p>
-            <form onsubmit="submitForm(event)">
-                <input type="password" id="password" placeholder="Enter Password" required>
-                <input type="submit" value="Login">
+            <h1>Pico W Admin</h1>
+            <p><!--#hello--></p>
+            <form onsubmit="toggleLED(event)">
+                <input type="checkbox" id="ledCheckbox">
+                <span style=<!--#bg1-->>Onboard LED</span><br>
             </form>
+            <span>Onboard Temp: <!--#temp1--></span><br>
         </div>
     </body>
 </html>

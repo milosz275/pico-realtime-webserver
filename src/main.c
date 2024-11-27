@@ -8,12 +8,12 @@
 #include "task.h"
 #include "lwipopts.h"
 #include "common.h"
+#include "state.h"
 
 #define TASK_SIZE 256
 
 int main()
 {
-    // init
     stdio_init_all();
     if (cyw43_arch_init())
     {
@@ -23,11 +23,12 @@ int main()
     cyw43_arch_enable_sta_mode();
     cyw43_wifi_pm(&cyw43_state, cyw43_pm_value(CYW43_NO_POWERSAVE_MODE, 20, 1, 1, 1));
 
-    // tasks
-    init_smp();
+    init_common();
+    init_program_state();
     vGuarded_print("\033[2J\033[H");
 
-    xTaskCreate(vTask_wifi_server, "WiFi server task", TASK_SIZE, NULL, 1, NULL);
+    xTaskCreate(vTask_print_temp, "Print temp task ", TASK_SIZE, NULL, 1, NULL);
+    xTaskCreate(vTask_wifi_server, "WiFi server task ", TASK_SIZE, NULL, 1, NULL);
 
     vTaskStartScheduler();
     while (true) {}

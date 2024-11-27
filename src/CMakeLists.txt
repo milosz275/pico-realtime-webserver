@@ -21,6 +21,7 @@ add_executable(${PROGRAM_NAME}
     ssi.c
     cgi.c
     common.c
+    state.c
 )
 
 target_link_libraries(${PROGRAM_NAME}
